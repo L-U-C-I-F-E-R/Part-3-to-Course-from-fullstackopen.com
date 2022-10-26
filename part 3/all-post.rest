@@ -2,3 +2,15 @@ GET  http://localhost:3001/api/persons
 
 ###
 GET  http://localhost:3001/
+
+###
+GET http://localhost:3001/info
+
+###
+POST http://localhost:3001/info
+Content-Type: text/html
+
+<request>
+    <name>sample</name>
+    <time>Wed, 21 Oct 2015 18:27:50 GMT</time>
+</request>
