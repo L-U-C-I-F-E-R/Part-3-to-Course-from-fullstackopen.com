@@ -1,6 +1,7 @@
 
 // const http = require('http')
 // const { time } = require('console')
+const { response } = require('express')
 const express = require('express')
 
 const app = express()
@@ -53,6 +54,18 @@ app.get("/api", (request, response) => {
 app.get("/api/persons", (request, response ) => {
     response.send(persons)
 });
+
+app.get("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id)
+  const note = persons.find(n => n.id === id)
+  if (note) {
+    response.json(note)
+  } else {
+    response.status(404).end()
+  }
+  
+  
+})
 
 const PORT = 3001
 app.listen(PORT, () => {
