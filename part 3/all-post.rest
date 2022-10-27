@@ -1,16 +1,14 @@
 GET  http://localhost:3001/api/persons
 
 ###
-GET  http://localhost:3001/
+GET  http://localhost:3001/api
 
 ###
 GET http://localhost:3001/info
 
 ###
-POST http://localhost:3001/info
-Content-Type: text/html
+GET  http://localhost:3001/api/persons/2
 
-<request>
-    <name>sample</name>
-    <time>Wed, 21 Oct 2015 18:27:50 GMT</time>
-</request>
+###
+DELETE http://localhost:3001/api/persons/3
+# Content-Type: application/json
