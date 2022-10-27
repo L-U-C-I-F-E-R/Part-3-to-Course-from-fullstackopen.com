@@ -6,7 +6,7 @@ const express = require('express')
 
 const app = express()
 
-// app.use(express.json())
+app.use(express.json())
 
 let persons = [
     { 
@@ -72,6 +72,29 @@ app.delete("/api/persons/:id", (request, response) => {
   // response.send("Deleted")
   // console.log(persons)
   response.status(204).end()
+})
+
+const checkName = (name) => {
+  // console.log(typeof name)
+  return persons.find(person => person.name === name)
+}
+
+app.post("/api/persons", (request, response) => {
+  const newPerson = request.body
+  const randomId = Math.floor(Math.random()*1000)
+  newPerson.id = randomId
+  // console.log(newPerson)
+  if (!newPerson.name || !newPerson.number){
+    response.send("Absent name or number ")
+    return response.status(204).end()
+  } else if (checkName(newPerson.name)){
+    response.send("Can not add. This name already contains in a list.")
+    return response.status(208).end()
+  } else {
+    persons = persons.concat(newPerson)
+    response.send(persons)
+  }
+  
 })
 
 
