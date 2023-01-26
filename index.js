@@ -3,10 +3,14 @@
 // const { time } = require('console')
 // const { response } = require('express')
 const express = require('express')
-
+const morgan = require('morgan')
 const app = express()
 
 app.use(express.json())
+
+
+morgan.token('type', function (req, res) { return JSON.stringify(req.body) })
+app.use(morgan(':method :url :status :res[content-type] - :response-time ms :type'))
 
 let persons = [
     { 
@@ -34,17 +38,15 @@ let persons = [
 app.get("/info", (request, response) =>{
   let length = persons.length
   let today = new Date();
-  let curentTime = `Curent time ${today}`
-  // response.writeHead(200, { 'Content-Type': 'text/xml'})
+  console.log(today)
 
-  response.send(`<p>Phonebook has info for ${length} people.<br>Curent time ${today}</p>`)
-    
-  // {/* let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  // response.writeHead(200, { 'Content-Type': 'text/xml'})
+  // let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   // let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   // let dateTime = date+' '+time;
-
-  // response.send(`Phonebook has info for ${length} people.Curent time ${today}`)
+  // console.log(dateTime) 
   
+  response.send(`<p>Phonebook has info for ${length} people.<br>Curent time ${today}</p>`) 
 })
 
 app.get("/api", (request, response) => {
