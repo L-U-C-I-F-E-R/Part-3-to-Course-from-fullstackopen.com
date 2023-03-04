@@ -1,7 +1,3 @@
-
-// const http = require('http')
-// const { time } = require('console')
-// const { response } = require('express')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -41,13 +37,6 @@ app.get("/info", (request, response) =>{
   let length = persons.length
   let today = new Date();
   console.log(today)
-
-  // response.writeHead(200, { 'Content-Type': 'text/xml'})
-  // let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-  // let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  // let dateTime = date+' '+time;
-  // console.log(dateTime) 
-  
   response.send(`<p>Phonebook has info for ${length} people.<br>Curent time ${today}</p>`) 
 })
 
@@ -71,15 +60,11 @@ app.get("/api/persons/:id", (request, response) => {
 
 app.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id)
-  // console.log(id)
   persons = persons.filter(person => person.id !== id)
-  // response.send("Deleted")
-  // console.log(persons)
   response.status(204).end()
 })
 
 const checkName = (name) => {
-  // console.log(typeof name)
   return persons.find(person => person.name === name)
 }
 
