@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+const path = require('path')
+>>>>>>> 25c02b0b3f1d4b058c4c0b85385088a552cb3717
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -5,6 +10,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static(path.join('build')))
 
 
 morgan.token('type', function (req, res) { return JSON.stringify(req.body) })
@@ -37,7 +43,17 @@ app.get("/info", (request, response) =>{
   let length = persons.length
   let today = new Date();
   console.log(today)
+<<<<<<< HEAD
   response.send(`<p>Phonebook has info for ${length} people.<br>Curent time ${today}</p>`) 
+=======
+  response.sendFile(path.join(`<p>Phonebook has info for ${length} people.<br>Curent time ${today}</p>`, 'build', 'index.html')) 
+  // response.writeHead(200, { 'Content-Type': 'text/xml'})
+  // let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  // let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  // let dateTime = date+' '+time;
+  // console.log(dateTime) 
+  
+>>>>>>> 25c02b0b3f1d4b058c4c0b85385088a552cb3717
 })
 
 app.get("/api", (request, response) => {
@@ -45,7 +61,8 @@ app.get("/api", (request, response) => {
 });
 
 app.get("/api/persons", (request, response ) => {
-    response.send(persons)
+    response.sendFile(path.join(persons, 'build', 'index.html')) 
+    // response.send(persons)
 });
 
 app.get("/api/persons/:id", (request, response) => {
